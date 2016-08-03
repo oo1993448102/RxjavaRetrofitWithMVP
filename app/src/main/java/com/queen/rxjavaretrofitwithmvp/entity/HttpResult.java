@@ -1,4 +1,4 @@
-package com.queen.rxjavaretrofitdemo.entity;
+package com.queen.rxjavaretrofitwithmvp.entity;
 
 /**
  * Created by liukun on 16/3/5.

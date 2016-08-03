@@ -1,4 +1,4 @@
-package com.queen.rxjavaretrofitdemo.entity;
+package com.queen.rxjavaretrofitwithmvp.entity;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

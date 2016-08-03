@@ -1,18 +1,18 @@
-package com.queen.rxjavaretrofitdemo.activity;
+package com.queen.rxjavaretrofitwithmvp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.queen.rxjavaretrofitdemo.R;
-import com.queen.rxjavaretrofitdemo.entity.AnnexMode;
-import com.queen.rxjavaretrofitdemo.http.GetAnnexMode;
-import com.queen.rxjavaretrofitdemo.http.HttpResultFunc;
-import com.queen.rxjavaretrofitdemo.subscribers.ProgressSubscriber;
-import com.queen.rxjavaretrofitdemo.subscribers.SubscriberOnNextListener;
+import com.queen.rxjavaretrofitwithmvp.R;
+import com.queen.rxjavaretrofitwithmvp.entity.AnnexMode;
+import com.queen.rxjavaretrofitwithmvp.http.GetAnnexMode;
+import com.queen.rxjavaretrofitwithmvp.http.HttpResultFunc;
+import com.queen.rxjavaretrofitwithmvp.subscribers.ProgressSubscriber;
+import com.queen.rxjavaretrofitwithmvp.subscribers.SubscriberOnNextListener;
 
-import com.queen.rxjavaretrofitdemo.http.HttpMethods;
+import com.queen.rxjavaretrofitwithmvp.http.HttpMethods;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private void getMovie(){
         Retrofit mRetrofit = HttpMethods.getInstance();
         GetAnnexMode mGetAnnexMode = mRetrofit.create(GetAnnexMode.class);
-        Observable observable = mGetAnnexMode.getTopMovie()
+        Observable observable = mGetAnnexMode.getAnnexMode()
                 .map(new HttpResultFunc<List<AnnexMode>>());
         HttpMethods.getObservable(observable,new ProgressSubscriber(getTopMovieOnNext, MainActivity.this));
     }

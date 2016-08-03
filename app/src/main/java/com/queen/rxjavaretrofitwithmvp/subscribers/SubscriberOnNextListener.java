@@ -1,4 +1,4 @@
-package com.queen.rxjavaretrofitdemo.subscribers;
+package com.queen.rxjavaretrofitwithmvp.subscribers;
 
 /**
  * Created by liukun on 16/3/10.

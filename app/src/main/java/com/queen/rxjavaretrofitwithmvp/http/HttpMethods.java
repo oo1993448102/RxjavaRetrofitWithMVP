@@ -1,6 +1,4 @@
-package com.queen.rxjavaretrofitdemo.http;
-
-import com.queen.rxjavaretrofitdemo.entity.HttpResult;
+package com.queen.rxjavaretrofitwithmvp.http;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**

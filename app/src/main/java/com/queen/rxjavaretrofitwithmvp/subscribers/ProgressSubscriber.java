@@ -1,10 +1,10 @@
-package com.queen.rxjavaretrofitdemo.subscribers;
+package com.queen.rxjavaretrofitwithmvp.subscribers;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.queen.rxjavaretrofitdemo.progress.ProgressCancelListener;
-import com.queen.rxjavaretrofitdemo.progress.ProgressDialogHandler;
+import com.queen.rxjavaretrofitwithmvp.progress.ProgressCancelListener;
+import com.queen.rxjavaretrofitwithmvp.progress.ProgressDialogHandler;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;

@@ -1,4 +1,4 @@
-package com.queen.rxjavaretrofitdemo.progress;
+package com.queen.rxjavaretrofitwithmvp.progress;
 
 import android.app.ProgressDialog;
 import android.content.Context;

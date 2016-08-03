@@ -1,4 +1,4 @@
-package com.queen.rxjavaretrofitdemo;
+package com.queen.rxjavaretrofitwithmvp;
 
 import org.junit.Test;
 

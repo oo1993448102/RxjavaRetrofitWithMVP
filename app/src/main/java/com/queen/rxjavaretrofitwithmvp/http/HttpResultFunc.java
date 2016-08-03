@@ -1,6 +1,6 @@
-package com.queen.rxjavaretrofitdemo.http;
+package com.queen.rxjavaretrofitwithmvp.http;
 
-import com.queen.rxjavaretrofitdemo.entity.HttpResult;
+import com.queen.rxjavaretrofitwithmvp.entity.HttpResult;
 
 import rx.functions.Func1;
 

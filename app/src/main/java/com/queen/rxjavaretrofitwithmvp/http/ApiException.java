@@ -1,4 +1,4 @@
-package com.queen.rxjavaretrofitdemo.http;
+package com.queen.rxjavaretrofitwithmvp.http;
 
 /**
  * Created by liukun on 16/3/10.
