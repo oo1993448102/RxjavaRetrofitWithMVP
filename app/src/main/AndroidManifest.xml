@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.queen.rxjavaretrofitwithmvp">
+    package="com.echo.rxjavaretrofitwithmvp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 网络状态权限 -->
