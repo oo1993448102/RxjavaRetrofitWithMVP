@@ -6,9 +6,7 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
-/**
- * Created by liukun on 16/3/10.
- */
+
 public class ProgressDialogHandler extends Handler {
 
     public static final int SHOW_PROGRESS_DIALOG = 1;
@@ -35,12 +33,12 @@ public class ProgressDialogHandler extends Handler {
             pd.setCancelable(cancelable);
 
             if (cancelable) {
-                pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        mProgressCancelListener.onCancelProgress();
-                    }
-                });
+//                pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                    @Override
+//                    public void onCancel(DialogInterface dialogInterface) {
+//                        mProgressCancelListener.onCancelProgress();
+//                    }
+//                });
             }
 
             if (!pd.isShowing()) {

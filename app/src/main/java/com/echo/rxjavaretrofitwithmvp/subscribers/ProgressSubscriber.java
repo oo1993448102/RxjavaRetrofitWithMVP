@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 
+import com.echo.rxjavaretrofitwithmvp.http.BaseNet;
 import com.echo.rxjavaretrofitwithmvp.progress.ProgressCancelListener;
 import com.echo.rxjavaretrofitwithmvp.progress.ProgressDialogHandler;
 
@@ -18,31 +19,30 @@ import rx.Subscriber;
  * 调用者自己对请求数据进行处理
  * Created by liukun on 16/3/10.
  */
-public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCancelListener {
+public class ProgressSubscriber<T> extends Subscriber<T> {
 
     private SubscriberOnNextListener mSubscriberOnNextListener;
-    private ProgressDialogHandler mProgressDialogHandler;
+//    private ProgressDialogHandler mProgressDialogHandler;
 
-    private Context context;
+//    private Context context;
 
-    public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener, Context context) {
+    public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener) {
         this.mSubscriberOnNextListener = mSubscriberOnNextListener;
-        this.context = context;
-        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
+//        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
     }
 
-    private void showProgressDialog(){
-        if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
-        }
-    }
-
-    private void dismissProgressDialog(){
-        if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-            mProgressDialogHandler = null;
-        }
-    }
+//    private void showProgressDialog(){
+//        if (mProgressDialogHandler != null) {
+//            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+//        }
+//    }
+//
+//    private void dismissProgressDialog(){
+//        if (mProgressDialogHandler != null) {
+//            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
+//            mProgressDialogHandler = null;
+//        }
+//    }
 
     /**
      * 订阅开始时调用
@@ -50,7 +50,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
      */
     @Override
     public void onStart() {
-        showProgressDialog();
+//        showProgressDialog();
     }
 
     /**
@@ -58,26 +58,27 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
      */
     @Override
     public void onCompleted() {
-        dismissProgressDialog();
-        Toast.makeText(context, "Get Top Movie Completed", Toast.LENGTH_SHORT).show();
+//        dismissProgressDialog();
+        onCancel();
     }
 
     /**
      * 对错误进行统一处理
      * 隐藏ProgressDialog
+     *
      * @param e
      */
     @Override
     public void onError(Throwable e) {
         if (e instanceof SocketTimeoutException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseNet.AppContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseNet.AppContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseNet.AppContext, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        dismissProgressDialog();
-
+//        dismissProgressDialog();
+        onCancel();
     }
 
     /**
@@ -95,8 +96,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
     /**
      * 取消ProgressDialog的时候，取消对observable的订阅，同时也取消了http请求
      */
-    @Override
-    public void onCancelProgress() {
+    public void onCancel() {
         if (!this.isUnsubscribed()) {
             this.unsubscribe();
         }

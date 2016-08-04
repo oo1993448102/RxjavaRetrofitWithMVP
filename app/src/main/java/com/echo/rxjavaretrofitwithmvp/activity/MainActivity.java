@@ -3,58 +3,65 @@ package com.echo.rxjavaretrofitwithmvp.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.echo.rxjavaretrofitwithmvp.R;
 import com.echo.rxjavaretrofitwithmvp.entity.AnnexMode;
-import com.echo.rxjavaretrofitwithmvp.http.GetAnnexMode;
-import com.echo.rxjavaretrofitwithmvp.http.HttpMethods;
-import com.echo.rxjavaretrofitwithmvp.http.HttpResultFunc;
-import com.echo.rxjavaretrofitwithmvp.subscribers.ProgressSubscriber;
-import com.echo.rxjavaretrofitwithmvp.subscribers.SubscriberOnNextListener;
+import com.echo.rxjavaretrofitwithmvp.imvp.IMainActivity;
+import com.echo.rxjavaretrofitwithmvp.presenter.MainPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Retrofit;
-import rx.Observable;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainActivity.IMainView {
 
     @Bind(R.id.click_me_BN)
     Button clickMeBN;
     @Bind(R.id.result_TV)
-    TextView resultTV;
+    ListView resultTV;
 
-    private SubscriberOnNextListener getTopMovieOnNext;
+
+    private MainPresenter mMainPresenter;
+    private List<AnnexMode> list = new ArrayList<AnnexMode>();
+    private MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mMainPresenter = new MainPresenter(this);
+        adapter = new MyAdapter(this, list);
+        resultTV.setAdapter(adapter);
+        mMainPresenter.onCreate();
 
-        getTopMovieOnNext = new SubscriberOnNextListener<List<AnnexMode>>() {
-            @Override
-            public void onNext(List<AnnexMode> subjects) {
-                resultTV.setText(subjects.toString());
-            }
-        };
+    }
+
+    @Override
+    protected void onDestroy() {
+        mMainPresenter.onDestory();
+        super.onDestroy();
     }
 
     @OnClick(R.id.click_me_BN)
     public void onClick() {
+        list.clear();
+        adapter.updateListView(list);
         getMovie();
     }
 
     //进行网络请求
-    private void getMovie(){
-        Retrofit mRetrofit = HttpMethods.getInstance();
-        GetAnnexMode mGetAnnexMode = mRetrofit.create(GetAnnexMode.class);
-        Observable observable = mGetAnnexMode.getAnnexMode()
-                .map(new HttpResultFunc<List<AnnexMode>>());
-        HttpMethods.getObservable(observable,new ProgressSubscriber(getTopMovieOnNext, MainActivity.this));
+    private void getMovie() {
+        mMainPresenter.getMovie();
+    }
+
+    @Override
+    public void updateListView(List<AnnexMode> subjects) {
+        list = subjects;
+        adapter.updateListView(subjects);
     }
 }

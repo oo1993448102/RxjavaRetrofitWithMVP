@@ -15,14 +15,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by liukun on 16/3/9.
- */
 public class HttpMethods {
-
-    public static final String BASE_URL = "http://172.16.20.81:8088/";
-
-    private static final int DEFAULT_TIMEOUT = 5;
 
     private static Retrofit retrofit;
 
@@ -38,7 +31,7 @@ public class HttpMethods {
     private HttpMethods() {
         //手动创建一个OkHttpClient并设置超时时间
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        builder.connectTimeout(BaseNet.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         builder.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -56,7 +49,7 @@ public class HttpMethods {
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(BASE_URL)
+                .baseUrl(BaseNet.BASE_URL)
                 .build();
     }
 
@@ -67,8 +60,8 @@ public class HttpMethods {
     private static <T> void toSubscribe(Observable<T> o, Subscriber<T> s){
          o.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s);
+                .observeOn(AndroidSchedulers.mainThread())  //订阅运行于主线程中
+                .subscribe(s);  //注册 subscriber
     }
 
 }

@@ -2,6 +2,7 @@ package com.echo.rxjavaretrofitwithmvp.entity;
 
 
 
+import com.echo.rxjavaretrofitwithmvp.util.PrettyJson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

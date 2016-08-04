@@ -1,4 +1,4 @@
-package com.echo.rxjavaretrofitwithmvp.entity;
+package com.echo.rxjavaretrofitwithmvp.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
