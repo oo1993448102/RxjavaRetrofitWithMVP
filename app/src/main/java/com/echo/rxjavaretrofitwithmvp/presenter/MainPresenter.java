@@ -17,6 +17,10 @@ public class MainPresenter implements IMainActivity.IMainPresenter {
     private MainModel model;
 
     private SubscriberOnNextListener getTopMovieOnNext;
+
+    private SubscriberOnNextListener second;
+
+
     private ProgressSubscriber subscriber;
 
     public MainPresenter(IMainActivity.IMainView mView){
@@ -31,6 +35,14 @@ public class MainPresenter implements IMainActivity.IMainPresenter {
 
     @Override
     public void onCreate() {
+        second = new SubscriberOnNextListener<List<AnnexMode>>() {   //不同请求
+            @Override
+            public void onNext(List<AnnexMode> subjects) {
+                if(subjects != null) {
+                    mView.showToast("2222");
+                }
+            }
+        };
         getTopMovieOnNext = new SubscriberOnNextListener<List<AnnexMode>>() {
             @Override
             public void onNext(List<AnnexMode> subjects) {
@@ -40,10 +52,17 @@ public class MainPresenter implements IMainActivity.IMainPresenter {
             }
         };
 
+
+
     }
 
     public void getMovie() {
         subscriber = new ProgressSubscriber(getTopMovieOnNext);
+        model.getMovie(subscriber);
+    }
+
+    public void text() {
+        subscriber = new ProgressSubscriber(second);
         model.getMovie(subscriber);
     }
 }

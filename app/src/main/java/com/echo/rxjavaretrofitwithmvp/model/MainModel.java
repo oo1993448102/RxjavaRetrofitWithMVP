@@ -1,5 +1,7 @@
 package com.echo.rxjavaretrofitwithmvp.model;
 
+import android.util.Log;
+
 import com.echo.rxjavaretrofitwithmvp.entity.AnnexMode;
 import com.echo.rxjavaretrofitwithmvp.http.HttpMethods;
 import com.echo.rxjavaretrofitwithmvp.http.HttpResultFunc;

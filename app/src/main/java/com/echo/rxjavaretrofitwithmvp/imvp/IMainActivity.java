@@ -10,6 +10,8 @@ import java.util.List;
 public class IMainActivity {
     public interface IMainView{
         void updateListView(List<AnnexMode> subjects);
+
+        void showToast(String s);
     }
 
     public interface IMainPresenter{

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.echo.rxjavaretrofitwithmvp.R;
 import com.echo.rxjavaretrofitwithmvp.entity.AnnexMode;
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivity.IMa
         getMovie();
     }
 
+    @OnClick(R.id.click_me_other)
+    public void onClickOther(){
+        mMainPresenter.text();
+    }
+
     //进行网络请求
     private void getMovie() {
         mMainPresenter.getMovie();
@@ -63,5 +69,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivity.IMa
     public void updateListView(List<AnnexMode> subjects) {
         list = subjects;
         adapter.updateListView(subjects);
+    }
+
+    @Override
+    public void showToast(String s) {
+        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
+
     }
 }

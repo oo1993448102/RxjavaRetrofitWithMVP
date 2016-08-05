@@ -32,7 +32,7 @@ public class HttpMethods {
         //手动创建一个OkHttpClient并设置超时时间
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(BaseNet.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        builder.addInterceptor(new Interceptor() {
+        builder.addInterceptor(new Interceptor() {   //拦截器
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
