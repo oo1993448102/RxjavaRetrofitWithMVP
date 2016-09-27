@@ -37,7 +37,7 @@ public class MainPresenter implements IMainActivity.IMainPresenter {
     public void onCreate() {
         second = new SubscriberOnNextListener<List<AnnexMode>>() {   //不同请求
             @Override
-            public void onNext(List<AnnexMode> subjects) {
+            public void onSuccess(List<AnnexMode> subjects) {
                 if(subjects != null) {
                     mView.showToast("2222");
                 }
@@ -45,7 +45,7 @@ public class MainPresenter implements IMainActivity.IMainPresenter {
         };
         getTopMovieOnNext = new SubscriberOnNextListener<List<AnnexMode>>() {
             @Override
-            public void onNext(List<AnnexMode> subjects) {
+            public void onSuccess(List<AnnexMode> subjects) {
                 if(subjects != null) {
                     mView.updateListView(subjects);
                 }

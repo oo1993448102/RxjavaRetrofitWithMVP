@@ -12,27 +12,10 @@ import rx.Subscriber;
 public class ProgressSubscriber<T> extends Subscriber<T> {
 
     private SubscriberOnNextListener mSubscriberOnNextListener;
-//    private ProgressDialogHandler mProgressDialogHandler;
-
-//    private Context context;
 
     public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener) {
         this.mSubscriberOnNextListener = mSubscriberOnNextListener;
-//        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
     }
-
-//    private void showProgressDialog(){
-//        if (mProgressDialogHandler != null) {
-//            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
-//        }
-//    }
-//
-//    private void dismissProgressDialog(){
-//        if (mProgressDialogHandler != null) {
-//            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-//            mProgressDialogHandler = null;
-//        }
-//    }
 
     /**
      * 订阅开始时调用
@@ -65,7 +48,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         } else if (e instanceof ConnectException) {
             Toast.makeText(BaseNet.AppContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else if(e instanceof ApiException) {
-            Toast.makeText(BaseNet.AppContext, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseNet.AppContext, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 //        dismissProgressDialog();
         onCancel();
@@ -80,7 +63,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     @Override
     public void onNext(T t) {
         if (mSubscriberOnNextListener != null) {
-            mSubscriberOnNextListener.onNext(t);
+            mSubscriberOnNextListener.onSuccess(t);
         }
     }
 

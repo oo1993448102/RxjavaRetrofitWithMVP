@@ -1,5 +1,7 @@
 package com.echo.rxjavaretrofitwithmvp.http;
 
+import android.util.Log;
+
 import com.echo.rxjavaretrofitwithmvp.BaseNet;
 
 import java.io.IOException;
@@ -47,6 +49,7 @@ public class HttpMethods {
 //                    Log.i("aaa","Token 失效");
 //                    return null;
 //                }
+                Log.i("url",chain.proceed(builder.build()).request().url().toString());  //url
                 return chain.proceed(builder.build());
             }
         });

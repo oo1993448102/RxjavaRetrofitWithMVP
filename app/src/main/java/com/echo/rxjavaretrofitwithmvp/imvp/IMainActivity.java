@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Created by EchoZhou on 2016/8/4.
  */
+
 public class IMainActivity {
     public interface IMainView{
         void updateListView(List<AnnexMode> subjects);
