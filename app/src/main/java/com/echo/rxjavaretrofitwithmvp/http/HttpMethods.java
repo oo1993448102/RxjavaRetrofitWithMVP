@@ -1,5 +1,7 @@
 package com.echo.rxjavaretrofitwithmvp.http;
 
+import com.echo.rxjavaretrofitwithmvp.BaseNet;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +22,8 @@ public class HttpMethods {
     private static Retrofit retrofit;
 
     //获取单例
-    public static Retrofit getInstance(){
-        if(retrofit == null){
+    public static Retrofit getInstance() {
+        if (retrofit == null) {
             new HttpMethods();
         }
         return retrofit;
@@ -37,10 +39,14 @@ public class HttpMethods {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 Request.Builder builder = request.newBuilder();
-                    builder.addHeader("X-LC-Sign", "FB87E3ADB06EAFD590BD2CD452EA57483964557A34908E3D");
+                builder.addHeader("X-LC-Sign", "FB87E3ADB06EAFD590BD2CD452EA57483964557A34908E3D");
 
                 builder.addHeader("X-LC-Token", "804E07E34815814782EE57A92D6DE3EE52412A27DA8EFB749659D3050C765268124D1C9B573FCD22");
 
+//                if(chain.proceed(builder.build()).code() == 200){
+//                    Log.i("aaa","Token 失效");
+//                    return null;
+//                }
                 return chain.proceed(builder.build());
             }
         });
@@ -53,12 +59,12 @@ public class HttpMethods {
                 .build();
     }
 
-    public static void getObservable(Observable observable ,Subscriber subscriber ){
+    public static void getObservable(Observable observable, Subscriber subscriber) {
         toSubscribe(observable, subscriber);
     }
 
-    private static <T> void toSubscribe(Observable<T> o, Subscriber<T> s){
-         o.subscribeOn(Schedulers.io())
+    private static <T> void toSubscribe(Observable<T> o, Subscriber<T> s) {
+        o.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())  //订阅运行于主线程中
                 .subscribe(s);  //注册 subscriber

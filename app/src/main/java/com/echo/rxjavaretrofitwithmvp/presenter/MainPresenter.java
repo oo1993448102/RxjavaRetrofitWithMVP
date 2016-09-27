@@ -53,7 +53,6 @@ public class MainPresenter implements IMainActivity.IMainPresenter {
         };
 
 
-
     }
 
     public void getMovie() {

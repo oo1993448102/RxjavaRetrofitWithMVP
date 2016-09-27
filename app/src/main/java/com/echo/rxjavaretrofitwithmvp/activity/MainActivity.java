@@ -74,6 +74,5 @@ public class MainActivity extends AppCompatActivity implements IMainActivity.IMa
     @Override
     public void showToast(String s) {
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
-
     }
 }

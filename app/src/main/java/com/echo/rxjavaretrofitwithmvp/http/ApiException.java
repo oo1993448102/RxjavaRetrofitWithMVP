@@ -1,8 +1,5 @@
 package com.echo.rxjavaretrofitwithmvp.http;
 
-/**
- * Created by liukun on 16/3/10.
- */
 public class ApiException extends RuntimeException {
 
     public static final int USER_NOT_EXIST = 100;

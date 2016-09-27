@@ -1,4 +1,4 @@
-package com.echo.rxjavaretrofitwithmvp.http;
+package com.echo.rxjavaretrofitwithmvp;
 
 import android.content.Context;
 

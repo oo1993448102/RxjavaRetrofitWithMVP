@@ -1,24 +1,14 @@
 package com.echo.rxjavaretrofitwithmvp.subscribers;
 
-import android.content.Context;
 import android.widget.Toast;
 
-
-import com.echo.rxjavaretrofitwithmvp.http.BaseNet;
-import com.echo.rxjavaretrofitwithmvp.progress.ProgressCancelListener;
-import com.echo.rxjavaretrofitwithmvp.progress.ProgressDialogHandler;
+import com.echo.rxjavaretrofitwithmvp.http.ApiException;
+import com.echo.rxjavaretrofitwithmvp.BaseNet;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
 import rx.Subscriber;
-
-/**
- * 用于在Http请求开始时，自动显示一个ProgressDialog
- * 在Http请求结束是，关闭ProgressDialog
- * 调用者自己对请求数据进行处理
- * Created by liukun on 16/3/10.
- */
 public class ProgressSubscriber<T> extends Subscriber<T> {
 
     private SubscriberOnNextListener mSubscriberOnNextListener;
@@ -74,12 +64,13 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
             Toast.makeText(BaseNet.AppContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
             Toast.makeText(BaseNet.AppContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(e instanceof ApiException) {
             Toast.makeText(BaseNet.AppContext, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 //        dismissProgressDialog();
         onCancel();
     }
+
 
     /**
      * 将onNext方法中的返回结果交给Activity或Fragment自己处理
